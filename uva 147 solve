@@ -1,0 +1,35 @@
+
+uva 147 :number of ways coin formation
+#include<bits/stdc++.h>
+#define mx  30001
+using namespace std;
+//how many ways a coin can change 
+long long  dp[mx];
+int main()
+{
+    int coins[5] = {1,5,10,25,50};
+    int m = 5;
+    dp[0] = 1;
+//main code
+    for(int j = 0;j<m;j++)
+    {
+
+        for(int i = 0;i<=30000;i++)
+        {
+            if(i>=coins[j])
+            {
+                dp[i] = dp[i]+dp[i-coins[j]];
+            }
+        }
+    }
+
+    int n;
+
+    while(cin>>n)
+    {
+        if(dp[n]>1)
+           printf("There are %lld ways to produce %d cents change.\n",dp[n],n);
+        else
+            printf("There is only 1 way to produce %d cents change.\n",n);
+    }
+}
